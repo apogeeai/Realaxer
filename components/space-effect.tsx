@@ -2,6 +2,8 @@
 
 import { useEffect, useRef } from 'react';
 
+const STAR_SPEED = 3;
+
 export function SpaceEffect() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -83,7 +85,7 @@ export function SpaceEffect() {
       const centerY = canvas.height / 2;
 
       stars.forEach((star, index) => {
-        star.z -= 10; // Move stars towards viewer
+        star.z -= STAR_SPEED; // Move stars towards viewer
 
         if (star.z <= 0) {
           stars[index] = createStar();

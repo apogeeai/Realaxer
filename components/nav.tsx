@@ -44,7 +44,7 @@ export function Nav({ onPlayModeChange }: { onPlayModeChange: (isPlaying: boolea
   };
 
   // Sound hooks
-  const [playNature, { stop: stopNature }] = useSound('/sounds/ambient-nature.mp3', {
+  const [playJungle, { stop: stopJungle }] = useSound('/sounds/jungle-ambient.mp3', {
     volume: 0.4,
     loop: true,
   });
@@ -59,10 +59,22 @@ export function Nav({ onPlayModeChange }: { onPlayModeChange: (isPlaying: boolea
     loop: true,
   });
 
+  const [playWhiteNoise, { stop: stopWhiteNoise }] = useSound('/sounds/white-noise.mp3', {
+    volume: 0.3,
+    loop: true,
+  });
+
+  const [playGreenNoise, { stop: stopGreenNoise }] = useSound('/sounds/green-noise.mp3', {
+    volume: 0.3,
+    loop: true,
+  });
+
   const stopAllSounds = () => {
-    stopNature();
+    stopJungle();
     stopRain();
     stopSpace();
+    stopWhiteNoise();
+    stopGreenNoise();
     setCurrentSound(null);
     setIsSoundOn(false);
   };
@@ -70,9 +82,9 @@ export function Nav({ onPlayModeChange }: { onPlayModeChange: (isPlaying: boolea
   const playSound = (soundType: string) => {
     stopAllSounds();
     switch (soundType) {
-      case 'nature':
-        playNature();
-        setCurrentSound('nature');
+      case 'jungle':
+        playJungle();
+        setCurrentSound('jungle');
         break;
       case 'rain':
         playRain();
@@ -81,6 +93,14 @@ export function Nav({ onPlayModeChange }: { onPlayModeChange: (isPlaying: boolea
       case 'space':
         playSpace();
         setCurrentSound('space');
+        break;
+      case 'white':
+        playWhiteNoise();
+        setCurrentSound('white');
+        break;
+      case 'green':
+        playGreenNoise();
+        setCurrentSound('green');
         break;
     }
     setIsSoundOn(true);
@@ -150,10 +170,10 @@ export function Nav({ onPlayModeChange }: { onPlayModeChange: (isPlaying: boolea
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-48 bg-black/90 backdrop-blur-sm border-white/20">
               <DropdownMenuItem 
-                onClick={() => playSound('nature')} 
+                onClick={() => playSound('jungle')} 
                 className="text-white hover:bg-white/20 focus:bg-white/20"
               >
-                Nature Sounds
+                Jungle Ambient
               </DropdownMenuItem>
               <DropdownMenuItem 
                 onClick={() => playSound('rain')} 
@@ -166,6 +186,18 @@ export function Nav({ onPlayModeChange }: { onPlayModeChange: (isPlaying: boolea
                 className="text-white hover:bg-white/20 focus:bg-white/20"
               >
                 Space Ambient
+              </DropdownMenuItem>
+              <DropdownMenuItem 
+                onClick={() => playSound('white')} 
+                className="text-white hover:bg-white/20 focus:bg-white/20"
+              >
+                White Noise
+              </DropdownMenuItem>
+              <DropdownMenuItem 
+                onClick={() => playSound('green')} 
+                className="text-white hover:bg-white/20 focus:bg-white/20"
+              >
+                Green Noise
               </DropdownMenuItem>
               <DropdownMenuItem 
                 onClick={stopAllSounds} 
