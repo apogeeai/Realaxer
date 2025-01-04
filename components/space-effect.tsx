@@ -3,6 +3,8 @@
 import { useEffect, useRef } from 'react';
 
 const STAR_SPEED = 3;
+const STAR_ALPHA = 0.72;
+const GLOW_ALPHA = 0.27;
 
 export function SpaceEffect() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -102,14 +104,14 @@ export function SpaceEffect() {
           return;
         }
 
-        // Draw star
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+        // Draw star with adjusted transparency
+        ctx.fillStyle = `rgba(255, 255, 255, ${STAR_ALPHA})`;
         ctx.beginPath();
         ctx.arc(x, y, size, 0, Math.PI * 2);
         ctx.fill();
 
-        // Add glow
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+        // Add glow with adjusted transparency
+        ctx.fillStyle = `rgba(255, 255, 255, ${GLOW_ALPHA})`;
         ctx.beginPath();
         ctx.arc(x, y, size * 2, 0, Math.PI * 2);
         ctx.fill();

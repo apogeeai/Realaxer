@@ -1,9 +1,33 @@
-export const sounds = {
-  'Rain': 'https://assets.mixkit.co/active_storage/sfx/2515/2515-preview.mp3',
-  'Ocean Waves': 'https://assets.mixkit.co/active_storage/sfx/2439/2439-preview.mp3',
-  'White Noise': 'https://assets.mixkit.co/active_storage/sfx/2437/2437-preview.mp3',
-  'Stream': 'https://assets.mixkit.co/active_storage/sfx/2442/2442-preview.mp3',
-  'Waterfall': 'https://assets.mixkit.co/active_storage/sfx/2443/2443-preview.mp3'
+export interface Sound {
+  name: string;
+  url: string;
+  volume: number;
+  loop: boolean;
+  category: 'nature' | 'ambient' | 'noise';
+}
+
+export const sounds: Record<string, Sound> = {
+  rain: {
+    name: 'Rain',
+    url: '/sounds/rain.mp3',
+    volume: 0.4,
+    loop: true,
+    category: 'nature'
+  },
+  nature: {
+    name: 'Nature Ambient',
+    url: '/sounds/ambient-nature.mp3',
+    volume: 0.4,
+    loop: true,
+    category: 'nature'
+  },
+  space: {
+    name: 'Space Ambient',
+    url: '/sounds/space-ambient.mp3',
+    volume: 0.3,
+    loop: true,
+    category: 'ambient'
+  }
 } as const;
 
-export type SoundType = keyof typeof sounds;
+export type SoundId = keyof typeof sounds;
