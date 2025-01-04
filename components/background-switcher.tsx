@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { backgrounds } from '@/lib/backgrounds';
+import { SnowEffect } from './snow-effect';
+import { SpaceEffect } from './space-effect';
 
 interface BackgroundSwitcherProps {
   children: React.ReactNode;
@@ -12,6 +14,11 @@ interface BackgroundSwitcherProps {
 export function BackgroundSwitcher({ children }: BackgroundSwitcherProps) {
   const [bgIndex, setBgIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+
+  const currentBackground = backgrounds[bgIndex];
+  const showSnowEffect = currentBackground.includes('wallhaven-vgv2zm') || 
+                        currentBackground.includes('sw2zerxbdp261');
+  const showSpaceEffect = currentBackground.includes('Wallpaper-2020');
 
   const changeBackground = (newIndex: number) => {
     setIsLoading(true);
@@ -37,7 +44,7 @@ export function BackgroundSwitcher({ children }: BackgroundSwitcherProps) {
     <main
       className="min-h-screen"
       style={{
-        backgroundImage: `url(${backgrounds[bgIndex]})`,
+        backgroundImage: `url(${currentBackground})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         transition: isLoading ? 'none' : 'filter 0.3s ease-out',
@@ -45,6 +52,8 @@ export function BackgroundSwitcher({ children }: BackgroundSwitcherProps) {
       }}
     >
       <div className="absolute inset-0 bg-black/30" />
+      {showSnowEffect && <SnowEffect />}
+      {showSpaceEffect && <SpaceEffect />}
       
       <div className="relative min-h-screen flex items-center justify-center px-4 sm:px-6">
         <Button
